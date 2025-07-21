@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Birthday Message</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      background: #1a1a1a;
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .phone {
+      width: 90vw;
+      max-width: 400px;
+      height: 90vh;
+      max-height: 720px;
+      background: #000;
+      border: 14px solid #0f65c6;
+      border-radius: 40px;
+      box-shadow: 0 0 40px rgba(235, 227, 227, 0.911);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      background-color: #075E54;
+      color: white;
+      padding: 10px 12px;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 30px 30px 0 0;
+    }
+
+    .header .dp {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 12px;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .contact-name {
+      font-size: 16px;
+    }
+
+    .screen {
+      flex: 1;
+      background: url('./background.jpg') center center/cover no-repeat, #e5ddd5;
+      background-blend-mode: multiply;
+      padding: 10px 16px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .chat-bubble {
+      max-width: 70%;
+      margin: 8px 0;
+      padding: 10px 14px;
+      border-radius: 20px;
+      font-size: 15px;
+      line-height: 1.4;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .from-me {
+      background: #dcf8c6;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .from-them {
+      background: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message {
+      display: none;
+      max-width: 90vw;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+      color: #fff;
+      animation: fadeIn 1.5s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @media (max-width: 400px) {
+      .phone {
+        border-radius: 30px;
+        border: 10px solid #c1c5c8;
+      }
+
+      .chat-bubble {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      .header {
+        font-size: 16px;
+        padding: 8px 10px;
+      }
+
+      .header .dp {
+        width: 30px;
+        height: 30px;
+        margin-right: 8px;
+      }
+    }
+
+    p {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="header">
+      <img src="./dp.png" class="dp" alt="Profile" />
+      <span class="contact-name">Panchami💖</span>
+    </div>
+    <div class="screen" id="screen"></div>
+  </div>
+
+  <div class="message" id="finalMessage"></div>
+
+  <canvas class="fireworks" id="fireworks"></canvas>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const screen = document.getElementById("screen");
+    const messageEl = document.getElementById("finalMessage");
+
+    const fakeMessage = "🎉🎂 Happy Birthday! 🥳🎈Wishing you endless joy 😊 and unforgettable moments today and always! ✨💐🎁";
+
+    function typeFakeMessage() {
+      const typingBubble = document.createElement("div");
+      typingBubble.className = "chat-bubble from-me";
+      screen.appendChild(typingBubble);
+      typeText(fakeMessage, typingBubble, () => {
+        setTimeout(() => eraseMessage(typingBubble), 1500);
+      });
+    }
+
+    function typeText(text, element, callback) {
+      let i = 0;
+      function typeChar() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i++);
+          setTimeout(typeChar, 40);
+        } else if (callback) {
+          callback();
+        }
+      }
+      typeChar();
+    }
+
+    function eraseMessage(bubble) {
+      let text = bubble.textContent;
+      let i = text.length;
+      const interval = setInterval(() => {
+        if (i > 0) {
+          bubble.textContent = text.substring(0, --i);
+        } else {
+          clearInterval(interval);
+          bubble.remove();
+          showFinalMessage();
+        }
+      }, 30);
+    }
+
+    const finalLines = [
+      "I was about to send you a quick birthday text...",
+      "But then I paused and thought you're not just anyone...",
+      "You're truly one of a kind...",
+      "A simple message could never capture what you mean to me.",
+      "You deserve something more, something meaningful,",
+      "something from the heart. So I made this for you... 💖✨🎉"
+    ];
+
+    function showFinalMessage() {
+      document.querySelector(".phone").style.display = "none";
+      messageEl.style.display = "block";
+
+      let delay = 0;
+
+      finalLines.forEach((line) => {
+        setTimeout(() => {
+          const typingDots = document.createElement("p");
+          typingDots.style.opacity = "0.6";
+          typingDots.style.fontStyle = "italic";
+          typingDots.style.fontSize = "1.1rem";
+          typingDots.style.color = "#ccc";
+          messageEl.appendChild(typingDots);
+
+          const dots = ["typing 🤔", "typing 💭", "typing 🤔💭"];
+          let dotIndex = 0;
+          const emojiInterval = setInterval(() => {
+            typingDots.textContent = dots[dotIndex++ % dots.length];
+          }, 400);
+
+          setTimeout(() => {
+            clearInterval(emojiInterval);
+            typingDots.remove();
+
+            const p = document.createElement("p");
+            p.textContent = "";
+            p.style.opacity = "0";
+            p.style.margin = "20px 0";
+            p.style.fontSize = "2rem";
+            p.style.background = "linear-gradient(90deg, #ff0043, #ff8c00)";
+            p.style.webkitBackgroundClip = "text";
+            p.style.webkitTextFillColor = "transparent";
+            p.style.fontWeight = "700";
+            p.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            p.style.transform = "translateY(10px)";
+            messageEl.appendChild(p);
+
+            let charIndex = 0;
+            const typeInterval = setInterval(() => {
+              p.textContent += line.charAt(charIndex++);
+              if (charIndex >= line.length) {
+                clearInterval(typeInterval);
+                p.style.opacity = "1";
+                p.style.transform = "translateY(0)";
+              }
+            }, 40);
+          }, 1000);
+        }, delay);
+
+        delay += line.length * 45 + 1800;
+      });
+
+      setTimeout(() => {
+        const btn = document.createElement("button");
+        btn.textContent = "Next";
+        btn.style.padding = "14px 28px";
+        btn.style.marginTop = "40px";
+        btn.style.fontSize = "1.2rem";
+        btn.style.background = "linear-gradient(to right, #ff0043, #ff8c00)";
+        btn.style.color = "#fff";
+        btn.style.border = "none";
+        btn.style.borderRadius = "10px";
+        btn.style.cursor = "pointer";
+        btn.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.3)";
+        btn.style.transition = "transform 0.3s ease";
+        btn.onmouseover = () => (btn.style.transform = "scale(1.05)");
+        btn.onmouseout = () => (btn.style.transform = "scale(1)");
+        btn.onclick = () => {
+          window.location.href = "../birthday/cake.html"; // Change if needed
+        };
+        messageEl.appendChild(btn);
+        launchFireworks();
+      }, delay + 1500);
+    }
+
+    window.onload = () => {
+      typeFakeMessage();
+    };
+
+    function launchFireworks() {
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      function Particle(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = 2;
+        this.color = color;
+        this.vx = Math.random() * 6 - 3;
+        this.vy = Math.random() * 6 - 3;
+        this.alpha = 1;
+        this.draw = function () {
+          ctx.globalAlpha = this.alpha;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        };
+        this.update = function () {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= 0.01;
+        };
+      }
+
+      function createFirework() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height / 2;
+        const colors = ["#ff0043", "#14fc56", "#1e90ff", "#ffff00"];
+        for (let i = 0; i < 30; i++) {
+          particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
+        }
+      }
+
+      function animateFireworks() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+          p.update();
+          p.draw();
+          if (p.alpha <= 0) particles.splice(i, 1);
+        });
+        requestAnimationFrame(animateFireworks);
+      }
+
+      setInterval(createFirework, 1000);
+      animateFireworks();
+    }
+  </script>
+</body>
+</html>

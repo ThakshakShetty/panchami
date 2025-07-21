@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ANSWER ME!</title>
+  <script src="https://use.typekit.net/lkh0ago.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* More aggressive shake effect for angry side */
+    .angry-text {
+      animation: shake 0.2s infinite alternate;
+      color: red;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .love-text {
+      animation: glow 1s infinite alternate;
+      color: #ff007f;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    @keyframes shake {
+      from { transform: translateX(-8px) rotate(-2deg); }
+      to { transform: translateX(8px) rotate(2deg); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px red, 0 0 20px pink; }
+      to { text-shadow: 0 0 20px red, 0 0 40px pink; }
+    }
+
+    .link-btn {
+      font-size: 18px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      display: inline-block;
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .link-angry {
+      background: black;
+      color: red;
+      border: 2px solid red;
+    }
+
+    .link-angry:hover {
+      background: red;
+      color: white;
+      transform: scale(1.2) rotate(3deg);
+    }
+
+    .link-love {
+      background: pink;
+      color: white;
+      border: 2px solid #ff007f;
+    }
+
+    .link-love:hover {
+      background: #ff007f;
+      color: white;
+      transform: scale(1.2) rotate(-3deg);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div>
+      <div>
+        <span class="angry-text">ARE YOU SCARED? RUN AWAY THEN! 😏🔥</span>
+        <span>
+          <a href="../selection/scared.html" class="link-btn link-angry">OUT FROM THE GAME! 🚀</a>
+        </span>
+      </div>
+      <svg viewBox='0 0 200 600'>
+        <polygon points='118.302698 8 59.5369448 66.7657528 186.487016 193.715824 14 366.202839 153.491505 505.694344 68.1413353 591.044514 200 591.044514 200 8'></polygon>
+      </svg>
+    </div>
+    <svg class='crack' viewBox='0 0 200 600'>
+      <polyline points='118.302698 8 59.5369448 66.7657528 186.487016 193.715824 14 366.202839 153.491505 505.694344 68.1413353 591.044514'></polyline>
+    </svg>
+    <div>
+      <svg viewBox='0 0 200 600'>
+        <polygon points='118.302698 8 59.5369448 66.7657528 186.487016 193.715824 14 366.202839 153.491505 505.694344 68.1413353 591.044514 0 591.044514 0 8'></polygon>
+      </svg>
+      <div>
+        <span class="love-text">I KNEW YOU WOULDN’T LEAVE! 😍🔥</span>
+        <span>
+          <a href="../selection/brave.html" class="link-btn link-love">COME LET'S SEE! 👀👀</a>
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/index.js"></script>
+  <body oncontextmenu="return false"></body>
+</body>
+</html>

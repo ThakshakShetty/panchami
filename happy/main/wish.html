@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>wish</title>
+  <style>
+      canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: none; /* Hide initially */
+      }
+      .content {
+          display: none; /* Hide content initially */
+      }
+      p {
+          margin: 0;
+          position: absolute;
+          top: 70%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          width: 100%;
+      }
+      .button {
+          display: inline-block;
+          padding: 20px 60px;
+          font-size: 18px;
+          color: white;
+          background: linear-gradient(45deg, #ff4e50, #f9d423);
+          border-radius: 10px;
+          text-decoration: none;
+          font-weight: bold;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          transition: 0.3s;
+          cursor: pointer;
+      }
+      .button:hover {
+          background: linear-gradient(45deg, #f9d423, #ff4e50);
+          transform: scale(1.1);
+      }
+      body {
+          overflow: hidden;
+          background: black;
+      }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+  <!-- Hidden canvas for animations -->
+  <canvas id="c"></canvas>
+
+  <!-- Play Music Button -->
+  <div id="playButtonContainer">
+    <p><a class="button" onclick="playMusic()">PLAY🎶🎶</a></p>
+  </div>
+
+  <!-- Hidden content that will be displayed after clicking the button -->
+  <div class="content" id="content">
+    <p><a href="../selection/cracker.html"  class="button">🎆 Let's Crack the Crackers 🎆</a></p>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="../gallary/sfx/song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function playMusic() {
+        document.getElementById('bgMusic').play();
+        document.getElementById('playButtonContainer').style.display = 'none'; // Hide play button
+        document.getElementById('content').style.display = 'block'; // Show content
+        document.getElementById('c').style.display = 'block'; // Show canvas
+        startAnimations(); // Start animations after clicking
+    }
+
+    function startAnimations() {
+        let script = document.createElement('script');
+        script.src = "js/index.js";
+        document.body.appendChild(script);
+    }
+  </script>
+
+  <body oncontextmenu="return false"></body>
+</body>
+</html>

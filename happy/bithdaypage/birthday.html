@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Room</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background-color: rgb(255, 213, 161);
+            transition: background 1s ease-in-out;
+            overflow: hidden;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        #doorImage {
+            width: 150px;
+            max-width: 80%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+            animation: shake 1s infinite alternate;
+        }
+
+        #doorContainer:hover #doorImage {
+            transform: scale(1.1);
+        }
+
+        #enterText {
+            color: rgb(222, 0, 199);
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(247, 247, 247, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #content {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            width: 100%;
+        }
+
+        #blastContainer {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        #blast {
+            width: 100%;
+            height: auto;
+        }
+
+        #nextBtn {
+            visibility: hidden;
+            opacity: 0;
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+            color: rgb(0, 0, 0);
+            border-radius: 8px;
+            transition: 0.5s;
+            position: absolute;
+            top: 85%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0px 0px 10px 4px rgba(40, 167, 69, 0.8);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        #nextBtn.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #nextBtn:hover {
+            background-color: #218838;
+            box-shadow: 0px 0px 15px 6px rgba(40, 167, 69, 1);
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0px 0px 10px 4px rgba(40, 167, 69, 0.8); }
+            100% { box-shadow: 0px 0px 20px 8px rgba(40, 167, 69, 1); }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                background-size: cover;
+            }
+
+            #enterText {
+                font-size: 16px;
+            }
+
+            #nextBtn {
+                padding: 10px 16px;
+                font-size: 16px;
+                top: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="doorContainer" onclick="enterBirthdayRoom()">
+        <img id="doorImage" src="../bithdaypage/door.png" alt="Door">
+        <p id="enterText">Enter Birthday Room</p>
+    </div>
+
+    <div id="content">
+        <div id="blastContainer">
+            <img id="blast" src="" >
+        </div>
+        <button id="nextBtn" onclick="goToNextPage()">CLICK NEXT</button>
+    </div>
+
+    <audio id="bgMusic" src="../gallary/sfx/123happybirthday.mp3" loop></audio>
+
+    <script>
+        function enterBirthdayRoom() {
+            document.body.style.background = "url('birthdayroom.png') no-repeat center center fixed";
+            document.body.style.backgroundSize = "cover";
+            document.getElementById("doorContainer").style.display = "none";
+            document.getElementById("content").style.display = "block";
+            document.getElementById("bgMusic").play();
+            
+            console.log("Blast GIF started...");
+            
+            setTimeout(() => {
+                let blastImg = document.getElementById("blast");
+                blastImg.src = "";
+                console.log("Blast GIF replaced with static image.");
+                
+                let nextBtn = document.getElementById("nextBtn");
+                nextBtn.classList.add("show");
+                console.log("Next button is now visible.");
+            }, 2500);
+        }
+
+        function goToNextPage() {
+            console.log("Navigating to next page...");
+            window.location.href = "../main/wish.html"; 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Page</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #remoteControl {
+      width: 100px;
+      max-width: 25vw;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 3;
+    }
+
+    #remoteControl:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    #instructionText {
+      color: rgb(247, 240, 252);
+      font-size: 5vw;
+      max-width: 90%;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(179, 228, 4, 0.8);
+      animation: pulse 2s infinite;
+      margin-top: 20px;
+      z-index: 3;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .tv-frame {
+      width: 90vw;
+      max-width: 720px;
+      aspect-ratio: 16 / 9;
+      border: 6px solid #111;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      margin-top: 20px;
+      z-index: 2;
+    }
+
+    .tv-screen {
+      width: 100%;
+      height:100%;
+      object-fit: contain;
+      background-color: rgb(244, 225, 225);
+    }
+
+    .button-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #redirectButton {
+      display: none;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      background: linear-gradient(45deg, #00ff00, #008000);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    #redirectButton:hover {
+      background: linear-gradient(45deg, #008000, #00ff00);
+      box-shadow: 0 0 20px rgba(0, 255, 0, 1);
+    }
+
+    video::-webkit-media-controls {
+      z-index: 5;
+    }
+
+    @media (max-height: 500px) {
+      .tv-frame {
+        margin-top: 10px;
+      }
+
+      #instructionText {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Remote Control Image -->
+  <img id="remoteControl" src="../TV/remote.png" alt="Remote Control" />
+  <p id="instructionText">Click the remote to on the TV</p>
+
+  <!-- Movie Section (Initially Hidden) -->
+  <div id="moviePage" class="hidden">
+    <div class="tv-frame">
+      <video id="video" class="tv-screen" controls>
+        <source src="../TV/movie.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <audio id="bg-music" loop>
+      <source src="../TV/gallary/sfx/haunted-bgm.mp3" type="audio/mp3" />
+    </audio>
+
+    <div class="button-container">
+      <button id="redirectButton">Next Page</button>
+    </div>
+  </div>
+
+  <script>
+    const remote = document.getElementById('remoteControl');
+    const instructionText = document.getElementById('instructionText');
+    const moviePage = document.getElementById('moviePage');
+    const video = document.getElementById('video');
+    const music = document.getElementById('bg-music');
+    const redirectButton = document.getElementById('redirectButton');
+
+    remote.addEventListener('click', function () {
+      // Change background to room image with TV
+      document.body.style.background = "url('../TV/screen1.png') no-repeat center center fixed";
+      document.body.style.backgroundSize = "cover";
+
+      // Hide initial elements
+      remote.style.display = 'none';
+      instructionText.style.display = 'none';
+
+      // Show video container
+      moviePage.classList.remove('hidden');
+
+      // Play media
+      video.play();
+      music.play();
+
+      // When video ends, show next button
+      video.onended = function () {
+        redirectButton.style.display = 'inline-block';
+      };
+    });
+
+    redirectButton.addEventListener('click', function () {
+      window.location.href = '../selection/card.html';
+    });
+  </script>
+
+</body>
+</html>

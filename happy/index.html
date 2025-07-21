@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursed Mirror</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+        
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mirror {
+            width: 80%;
+            max-width: 500px;
+            height: 300px;
+            background: url('../happy/gallary/img/glass.png');
+            background-size: cover;
+            border: 5px solid white;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            position: relative;
+            animation: flicker 3s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; filter: blur(3px); }
+            100% { opacity: 1; }
+        }
+
+        .text {
+            font-size: 2em;
+            font-family: 'Creepster', cursive;
+            position: absolute;
+            width: 100%;
+            top: 40%;
+            transform: translateY(-50%);
+            animation: distortion 4s infinite alternate;
+        }
+
+        @keyframes distortion {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(-2deg); text-shadow: 3px 3px 10px red; }
+            100% { transform: scale(1) rotate(2deg); }
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            font-family: fantasy;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            animation: shake 1.5s infinite;
+        }
+
+        .button:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+            transform: scale(1.2);
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(3px); }
+        }
+
+        .room-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background: url('../happy/gallary/img/house.jpg') center/cover no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: enterRoom 2s forwards;
+        }
+
+        @keyframes enterRoom {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .message {
+            font-size: 2em;
+            font-family: 'Creepster', cursive;
+            color: red;
+            text-shadow: 3px 3px 10px black;
+            margin-bottom: 20px;
+        }
+
+        .door {
+            width: 150px;
+            height: 300px;
+            background: url('../happy/gallary/door.svg') center/cover no-repeat;
+            cursor: pointer;
+            animation: none;
+        }
+
+        .shake-door {
+            animation: doorShake 1.5s infinite;
+        }
+
+        @keyframes doorShake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(2px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="mirror">
+        <div class="text">Who is behind you? 👀</div>
+    </div>
+    <button class="button" id="getIntoRoom">Get into the Room</button>
+    
+    <div class="room-container" id="room">
+        <div class="message">Welcome to the haunted chamber... There's no turning back.</div>
+        <div class="door" id="door"></div>
+    </div>
+    
+    <audio id="backgroundMusic" src="../happy/gallary/sfx/haunted-bgm.mp3" loop></audio>
+    
+    <script>
+        document.getElementById('getIntoRoom').addEventListener('click', function() {
+            const audio = document.getElementById('backgroundMusic');
+            audio.play();
+            document.getElementById('room').style.display = 'flex';
+            document.getElementById('door').classList.add('shake-door');
+        });
+
+        document.getElementById('door').addEventListener('click', function() {
+            window.location.href = '../happy/rooms/bulb.html';
+        });
+    </script>
+</body>
+</html>

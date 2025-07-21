@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../birthday/styles.css">
+    <title>Birthday</title>
+    <style>
+      .next-page-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #08f2de;
+            color: rgb(1, 0, 0);
+            border: 5px solid purple;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(196, 243, 242, 0.8);
+            animation: glow-btn 1.5s infinite alternate, bounce 1s infinite;
+            transition: transform 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            z-index: 9999;
+        }
+        .next-page-button:hover {
+            background-color: #e91e63;
+            transform: scale(1.1);
+        }
+
+        @keyframes glow-btn {
+            from {
+                box-shadow: 0 0 15px rgba(255, 64, 129, 0.8);
+            }
+            to {
+                box-shadow: 0 0 25px rgba(255, 64, 129, 1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('../gallary/personal/wishmain.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+      
+      .icons span {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        animation: glow 1.5s infinite alternate;
+      }
+      
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+        to {
+          text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      .flower {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        animation: fall linear infinite;
+      }
+      
+      @keyframes fall {
+        from {
+          transform: translateY(-10vh) rotate(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .star {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        bottom: 0;
+        animation: rise 4s linear infinite;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        opacity: 1;
+      }
+      
+      @keyframes rise {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        80% {
+          transform: translateY(-80vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <a href="../bithdaypage/birthday.html" class="next-page-button" id="nextPage">Next Page 🚀</a>
+    
+    <audio id="bgMusic" src="../gallary/sfx/ratiyan.mp3" preload="auto"></audio>
+
+    <div class="moon">
+      <div class="crater1"></div>
+      <div class="crater2"></div>
+      <div class="crater3"></div>
+    </div>
+
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <div id="sea"></div>
+    <div id="beach"></div>
+    <img src="../gallary/personal/wishmain.jpg" style="display: none;"/>
+    
+    <div id="merrywrap" class="merrywrap" onclick="playMusic()">
+      <div class="giftbox">
+        <div class="cover">
+          <div class=""></div>
+        </div>
+        <div class="box"></div>
+      </div>
+      <div class="icons">
+        <div class="row">
+          <span>H</span>
+          <span>A</span>
+          <span>P</span>
+          <span>P</span>
+          <span>Y</span>
+        </div>
+        <div class="row">
+          <span>B</span>
+          <span>I</span>
+          <span>R</span>
+          <span>T</span>
+          <span>H</span>
+          <span>D</span>
+          <span>A</span>
+          <span>Y</span>
+        </div>
+
+      </div>
+    </div>
+   
+
+    <script>
+      function playMusic() {
+        var music = document.getElementById("bgMusic");
+        if (music.paused) {
+          music.play();
+        }
+        document.querySelector(".dateB").style.display = "block";
+      }
+
+      document.getElementById("nextPage").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevents default action to test JavaScript navigation
+            console.log("Button clicked! Navigating to cracker.html...");
+            window.location.href = "../bithdaypage/birthday.html"; // Force navigation
+        });
+      
+      function createFlowers() {
+        for (let i = 0; i < 10; i++) {
+          let flower = document.createElement("img");
+          flower.classList.add("flower");
+          flower.src = i % 2 === 0 ? "../gallary/flower.png" : "../gallary/flower1.png";
+          flower.style.left = Math.random() * 100 + "vw";
+          flower.style.animationDuration = Math.random() * 3 + 2 + "s";
+          document.body.appendChild(flower);
+          setTimeout(() => flower.remove(), 3000);
+        }
+      }
+      setInterval(createFlowers, 1000);
+
+      function createStars() {
+        for (let i = 0; i < 10; i++) {
+          let star = document.createElement("div");
+          star.classList.add("star");
+          star.style.left = Math.random() * 100 + "vw";
+          star.style.bottom = "0px";
+          star.style.animationDuration = Math.random() * 3 +  + "s";
+          document.body.appendChild(star);
+          setTimeout(() => star.remove(), 3000);
+        }
+      }
+      setInterval(createStars, 1000);
+
+      
+    </script>
+    <script src="../birthday/myfile.js"></script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send a Message</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: url('../gallary/img/whatsapp.png') no-repeat center center/cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .message-box {
+      max-width: 400px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1s ease-in-out;
+      text-align: center;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    textarea, input {
+      width: 80%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: none;
+      font-size: 16px;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      font-weight: bold;
+      color: #cb00b3;
+      background: whitesmoke;
+    }
+    button {
+      width: 80%;
+      padding: 12px;
+      border: 4px solid purple;
+      background: linear-gradient(45deg, #d504c7, #d7c500);
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    button:hover {
+      background: linear-gradient(45deg, #128C7E, #25D366);
+      transform: scale(1.05);
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    h2 {
+      margin-bottom: 15px;
+      font-size: 26px;
+    }
+  </style>
+</head>
+<body>
+  <div class="message-box">
+    <h2>Send a Message</h2>
+    <input type="text" id="emoji" placeholder="Add emoji 😊...">
+    <textarea id="message" placeholder="Type your message here..."></textarea>
+    <button onclick="sendWhatsApp()">Send via WhatsApp</button>
+  </div>
+
+  <script>
+    function sendWhatsApp() {
+      var emoji = document.getElementById("emoji").value;
+      var message = document.getElementById("message").value;
+      
+      if (emoji.trim() === "" && message.trim() === "") {
+        alert("Please enter a message or emoji!");
+        return;
+      }
+      
+      var fullMessage = emoji + " " + message;
+      var url = "https://wa.me/9164078440?text=" + encodeURIComponent(fullMessage);
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
