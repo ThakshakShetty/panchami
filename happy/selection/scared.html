@@ -1,173 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scared? 😂</title>
-    <style>
-        /* Initially hide background */
-        body {
-            background-color: black; /* Black screen before reveal */
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scared? 😂</title>
+  <style>
+    /* Base Body */
+    body {
+      background-color: black;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
 
-        /* Hidden content initially */
-        .content {
-            display: none;
-        }
+    /* Initially hidden content */
+    .content {
+      display: none;
+    }
 
-        /* Are You Sure Button */
-        .sure-button {
-            background: red;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
-            transition: 0.3s ease-in-out;
-        }
+    /* Sure button */
+    .sure-button {
+      background: red;
+      color: white;
+      font-size: 5vw;
+      font-weight: bold;
+      padding: 3vw 6vw;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+      transition: 0.3s ease-in-out;
+    }
 
-        .sure-button:hover {
-            background: yellow;
-            color: black;
-            box-shadow: 0 0 25px yellow;
-            transform: scale(1.1);
-        }
+    .sure-button:hover {
+      background: yellow;
+      color: black;
+      box-shadow: 0 0 25px yellow;
+      transform: scale(1.05);
+    }
 
-        /* Background (Hidden initially) */
-        .bg-active {
-            background-image: url('../gallary/personal/funny.jpg'); /* Replace with your image */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+    /* Background image after reveal */
+    .bg-active {
+      background-image: url('../gallary/personal/funny.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-        /* Funny teasing message */
-        .message {
-            font-size: 30px;
-            color: white;
-            font-weight: bold;
-            text-shadow: 3px 3px 10px black;
-            position: absolute;
-            top: 50px;
-            text-align: center;
-        }
+    /* Funny Message */
+    .message {
+      font-size: 5vw;
+      color: white;
+      font-weight: bold;
+      text-shadow: 3px 3px 10px black;
+      text-align: center;
+      position: relative;
+      margin-top: 15vh;
+    }
 
-        /* Click Back Button */
-        .back-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff007f;
-            color: white;
-            padding: 15px 30px;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
-            transition: 0.3s ease-in-out;
-        }
+    /* Back button */
+    .back-button {
+      margin-top: 4vh;
+      background: #ff007f;
+      color: white;
+      padding: 3vw 6vw;
+      font-size: 4vw;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+      transition: 0.3s ease-in-out;
+    }
 
-        .back-button:hover {
-            background: yellow;
-            color: black;
-            box-shadow: 0 0 25px yellow;
-            transform: scale(1.1);
-        }
+    .back-button:hover {
+      background: yellow;
+      color: black;
+      box-shadow: 0 0 25px yellow;
+      transform: scale(1.05);
+    }
 
-        /* Floating Emojis */
-        .emoji {
-            position: absolute;
-            font-size: 100px; /* BIGGER Size */
-            opacity: 0.9;
-            animation: float 6s infinite linear;
-        }
+    /* Floating Emojis */
+    .emoji {
+      position: absolute;
+      font-size: 10vw;
+      opacity: 0.9;
+      animation: float 6s infinite linear;
+      pointer-events: none;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(360deg); }
-        }
-    </style>
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    /* Media Queries for smaller devices */
+    @media (min-width: 768px) {
+      .sure-button, .back-button {
+        font-size: 24px;
+        padding: 15px 30px;
+      }
+
+      .message {
+        font-size: 30px;
+        margin-top: 10vh;
+      }
+
+      .emoji {
+        font-size: 100px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Background Music (Hidden) -->
-    <audio id="bg-music" loop>
-        <source src="../gallary/sfx/smile.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="../gallary/sfx/smile.mp3" type="audio/mpeg">
+  </audio>
 
-    <!-- "Are You Sure?" Button -->
-    <button class="sure-button" id="sure-btn">Are you sure? 🤔</button>
+  <!-- Button -->
+  <button class="sure-button" id="sure-btn">Are you sure? 🤔</button>
 
-    <!-- Content (Initially Hidden) -->
-    <div class="content" id="content">
-
-        <!-- Funny Message -->
-        <div class="message">
-            🤣 Oh no! Are you scared?! <br> 
-            Don't run away now! Click Back😆 
-        </div>
-
-        <!-- Click Back Button -->
-        <button class="back-button" onclick="window.location.href='../challange/index.html'">Click Back</button>
-
+  <!-- Hidden Content -->
+  <div class="content" id="content">
+    <div class="message">
+      🤣 Oh no! Are you scared?!<br>
+      Don't run away now! Click Back 😆
     </div>
 
-    <script>
-        // Array of smiling emojis
-        const emojis = ["😃", "😂", "😁", "😆", "🤣", "😊", "😍"];
+    <button class="back-button" onclick="window.location.href='../challange/index.html'">Click Back</button>
+  </div>
 
-        // Function to create emoji elements
-        function createEmoji() {
-            const emoji = document.createElement("div");
-            emoji.classList.add("emoji");
-            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            document.body.appendChild(emoji);
+  <script>
+    const emojis = ["😃", "😂", "😁", "😆", "🤣", "😊", "😍"];
 
-            // Random positioning
-            emoji.style.left = Math.random() * 100 + "vw";
-            emoji.style.animationDuration = Math.random() * 3 + 4 + "s"; // 4s to 7s
+    function createEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = Math.random() * 3 + 4 + "s";
 
-            // Remove emoji after animation
-            setTimeout(() => {
-                emoji.remove();
-            }, 4000);
-        }
+      setTimeout(() => {
+        emoji.remove();
+      }, 4000);
+    }
 
-        // Show content and play music when button is clicked
-        document.getElementById("sure-btn").addEventListener("click", function() {
-            // Play music
-            const music = document.getElementById("bg-music");
-            music.play().catch(error => {
-                console.log("Autoplay blocked. User interaction required.");
-            });
+    document.getElementById("sure-btn").addEventListener("click", function () {
+      const music = document.getElementById("bg-music");
+      music.play().catch(error => {
+        console.log("Autoplay blocked. User interaction required.");
+      });
 
-            // Show hidden content
-            document.getElementById("content").style.display = "block";
-
-            // Change background
-            document.body.classList.add("bg-active");
-
-            // Remove the "Are you sure?" button
-            this.remove();
-
-            // Start floating emojis
-            setInterval(createEmoji, 300);
-        });
-    </script>
+      document.getElementById("content").style.display = "block";
+      document.body.classList.add("bg-active");
+      this.remove();
+      setInterval(createEmoji, 300);
+    });
+  </script>
 
 </body>
 </html>
