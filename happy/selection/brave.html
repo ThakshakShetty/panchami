@@ -1,174 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bravest of All? 💪🔥</title>
-    <style>
-        /* Initially hide background */
-        body {
-            background-color: black; /* Black screen before reveal */
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bravest of All? 💪🔥</title>
+  <style>
+    body {
+      background-color: black;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
 
-        /* Hidden content initially */
-        .content {
-            display: none;
-        }
+    .content {
+      display: none;
+      text-align: center;
+    }
 
-        /* Are You Sure Button - Updated Style */
-        .sure-button {
-            background: linear-gradient(45deg, #ff4b1f, #ff9068);
-            color: white;
-            font-size: 26px;
-            font-weight: bold;
-            padding: 18px 35px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 75, 31, 0.9);
-            transition: 0.3s ease-in-out;
-        }
+    .sure-button {
+      background: linear-gradient(45deg, #ff4b1f, #ff9068);
+      color: white;
+      font-size: 6vw;
+      font-weight: bold;
+      padding: 4vw 8vw;
+      border: none;
+      border-radius: 5vw;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 75, 31, 0.9);
+      transition: 0.3s ease-in-out;
+    }
 
-        .sure-button:hover {
-            background: linear-gradient(45deg, #ff9068, #ff4b1f);
-            color: black;
-            box-shadow: 0 0 30px rgba(255, 144, 104, 1);
-            transform: scale(1.1);
-        }
+    .sure-button:hover {
+      background: linear-gradient(45deg, #ff9068, #ff4b1f);
+      color: black;
+      box-shadow: 0 0 30px rgba(255, 144, 104, 1);
+      transform: scale(1.1);
+    }
 
-        /* Background (Hidden initially) */
-        .bg-active {
-            background-image: url('../gallary/personal/brave.jpg'); /* Replace with a bravery-themed image */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+    .bg-active {
+      background-image: url('../gallary/personal/brave.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-        /* Funny bravery message */
-        .message {
-            font-size: 30px;
-            color: white;
-            font-weight: bold;
-            text-shadow: 3px 3px 10px black;
-            position: absolute;
-            top: 50px;
-            text-align: center;
-        }
+    .message {
+      font-size: 5vw;
+      color: white;
+      font-weight: bold;
+      text-shadow: 3px 3px 10px black;
+      margin-top: 20vh; /* Message pushed slightly down */
+      padding: 0 5vw;
+    }
 
-        /* Click Back Button - Updated Style */
-        .back-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #0061ff, #60efff);
-            color: white;
-            padding: 16px 32px;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 97, 255, 0.9);
-            transition: 0.3s ease-in-out;
-        }
+    .back-button {
+      margin-top: 6vh;
+      background: linear-gradient(45deg, #0061ff, #60efff);
+      color: white;
+      padding: 4vw 8vw;
+      font-size: 5vw;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 5vw;
+      box-shadow: 0 0 15px rgba(0, 97, 255, 0.9);
+      transition: 0.3s ease-in-out;
+    }
 
-        .back-button:hover {
-            background: linear-gradient(45deg, #60efff, #0061ff);
-            color: black;
-            box-shadow: 0 0 25px rgba(96, 239, 255, 1);
-            transform: scale(1.1);
-        }
+    .back-button:hover {
+      background: linear-gradient(45deg, #60efff, #0061ff);
+      color: black;
+      box-shadow: 0 0 25px rgba(96, 239, 255, 1);
+      transform: scale(1.1);
+    }
 
-        /* Floating Brave Emojis */
-        .emoji {
-            position: absolute;
-            font-size: 100px; /* BIGGER Size */
-            opacity: 0.9;
-            animation: float 6s infinite linear;
-        }
+    .emoji {
+      position: absolute;
+      font-size: 10vw;
+      opacity: 0.9;
+      animation: float 6s infinite linear;
+      pointer-events: none;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(360deg); }
-        }
-    </style>
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    /* Responsive adjustments for larger screens */
+    @media (min-width: 768px) {
+      .sure-button, .back-button {
+        font-size: 24px;
+        padding: 16px 32px;
+        border-radius: 15px;
+      }
+
+      .message {
+        font-size: 28px;
+        margin-top: 15vh;
+      }
+
+      .emoji {
+        font-size: 100px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Background Music (Hidden) -->
-    <audio id="bg-music" loop>
-        <source src="../gallary/sfx/waa.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="../gallary/sfx/waa.mp3" type="audio/mpeg">
+  </audio>
 
-    <!-- "Are You Sure?" Button -->
-    <button class="sure-button" id="sure-btn">Are you sure? 🤔</button>
+  <!-- Are You Sure Button -->
+  <button class="sure-button" id="sure-btn">Are you sure? 🤔</button>
 
-    <!-- Content (Initially Hidden) -->
-    <div class="content" id="content">
-
-        <!-- Funny Message -->
-        <div class="message">
-            Wow! Such bravery! 🦸‍♂️👏👏👏 <br> 
-            A big round of applause for you! 👏🔥💪<br>
-            A person who secured a gold in the SSLC exam! 🏆
-        </div>
-
-        <!-- Click Back Button -->
-        <button class="back-button" onclick="window.location.href='../msg/Message.html'">Click Next</button>
-
+  <!-- Hidden Content -->
+  <div class="content" id="content">
+    <div class="message">
+      Wow! Such bravery! 🦸‍♂️👏👏👏 <br> 
+      A big round of applause for you! 👏🔥💪<br>
+      A person who secured a gold in the SSLC exam! 🏆
     </div>
+    <button class="back-button" onclick="window.location.href='../msg/Message.html'">Click Next</button>
+  </div>
 
-    <script>
-        // Array of bravery emojis
-        const emojis = ["💪", "🔥", "🏆", "🦁", "⚡", "🛡️"];
+  <script>
+    const emojis = ["💪", "🔥", "🏆", "🦁", "⚡", "🛡️"];
 
-        // Function to create emoji elements
-        function createEmoji() {
-            const emoji = document.createElement("div");
-            emoji.classList.add("emoji");
-            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            document.body.appendChild(emoji);
+    function createEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = Math.random() * 3 + 4 + "s";
 
-            // Random positioning
-            emoji.style.left = Math.random() * 100 + "vw";
-            emoji.style.animationDuration = Math.random() * 3 + 4 + "s"; // 4s to 7s
+      setTimeout(() => emoji.remove(), 4000);
+    }
 
-            // Remove emoji after animation
-            setTimeout(() => {
-                emoji.remove();
-            }, 4000);
-        }
-
-        // Show content and play music when button is clicked
-        document.getElementById("sure-btn").addEventListener("click", function() {
-            // Play music
-            const music = document.getElementById("bg-music");
-            music.play().catch(error => {
-                console.log("Autoplay blocked. User interaction required.");
-            });
-
-            // Show hidden content
-            document.getElementById("content").style.display = "block";
-
-            // Change background
-            document.body.classList.add("bg-active");
-
-            // Remove the "Are you sure?" button
-            this.remove();
-
-            // Start floating emojis
-            setInterval(createEmoji, 300);
-        });
-    </script>
+    document.getElementById("sure-btn").addEventListener("click", function () {
+      const music = document.getElementById("bg-music");
+      music.play().catch(() => console.log("Autoplay blocked."));
+      document.getElementById("content").style.display = "block";
+      document.body.classList.add("bg-active");
+      this.remove();
+      setInterval(createEmoji, 300);
+    });
+  </script>
 
 </body>
 </html>
